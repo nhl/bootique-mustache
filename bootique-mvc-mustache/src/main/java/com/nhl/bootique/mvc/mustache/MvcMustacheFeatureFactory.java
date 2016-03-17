@@ -25,7 +25,8 @@ public class MvcMustacheFeatureFactory {
 	 */
 	// TODO: should we implement an alternative to Jersey crazy template loading
 	// mechanism... E.g. dropwizard ties template paths to "view" objects (that
-	// are really model objects)...
+	// are really model objects)... FWIW with the current scheme Eclipse gives a
+	// warning "Type Xyz collides with a package".
 	public void setTemplateBase(String templateBase) {
 		this.templateBase = templateBase;
 	}
