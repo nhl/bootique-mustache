@@ -15,13 +15,12 @@
 	<name>REST-based MVC web framework for Bootique with pluggable templating engines</name>
 	<description>Provides a REST-based MVC web framework for Bootique with pluggable templating engines.</description>
 	<modules>
+		<module>bootique-mvc</module>
 		<module>bootique-mvc-mustache</module>
 	</modules>
 	<properties>
 		<bootique-version>0.15-SNAPSHOT</bootique-version>
 		<bootique-jersey-version>0.14-SNAPSHOT</bootique-jersey-version>
-		<!-- Ideally should match jersey version from bootique-jersey. -->
-		<jersey-version>2.21</jersey-version>
 	</properties>
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com/nhl/bootique-mvc</developerConnection>

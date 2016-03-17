@@ -15,8 +15,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.jetty.server.Server;
-import org.glassfish.jersey.server.mvc.Template;
-import org.glassfish.jersey.server.mvc.Viewable;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -24,6 +22,7 @@ import org.junit.Test;
 import com.nhl.bootique.BQRuntime;
 import com.nhl.bootique.Bootique;
 import com.nhl.bootique.jersey.JerseyModule;
+import com.nhl.bootique.mvc.AbstractView;
 import com.nhl.bootique.test.junit.BQDaemonTestFactory;
 
 public class MvcMustacheModuleIT {
@@ -42,27 +41,19 @@ public class MvcMustacheModuleIT {
 	}
 
 	@Test
-	public void testViewable() {
+	public void testV1() {
 		WebTarget base = ClientBuilder.newClient().target("http://localhost:8080");
-		Response r1 = base.path("/viewable").request().get();
+		Response r1 = base.path("/v1").request().get();
 		assertEquals(Status.OK.getStatusCode(), r1.getStatus());
-		assertEquals("viewable_string_p1_number_564", r1.readEntity(String.class));
+		assertEquals("v1_string_p1_number_564", r1.readEntity(String.class));
 	}
 
 	@Test
-	public void testTemplate() {
+	public void testV2() {
 		WebTarget base = ClientBuilder.newClient().target("http://localhost:8080");
-		Response r1 = base.path("/template").request().get();
+		Response r1 = base.path("/v2").request().get();
 		assertEquals(Status.OK.getStatusCode(), r1.getStatus());
-		assertEquals("template_string_p1v_number_5649", r1.readEntity(String.class));
-	}
-	
-	@Test
-	public void testTemplateNoExt() {
-		WebTarget base = ClientBuilder.newClient().target("http://localhost:8080");
-		Response r1 = base.path("/template_no_ext").request().get();
-		assertEquals(Status.OK.getStatusCode(), r1.getStatus());
-		assertEquals("template_string_p1vv_number_56490", r1.readEntity(String.class));
+		assertEquals("v2_string_p2_number_5649", r1.readEntity(String.class));
 	}
 
 	@Path("/")
@@ -70,32 +61,35 @@ public class MvcMustacheModuleIT {
 	public static class Api {
 
 		@GET
-		@Path("/template")
-		@Template(name = "MvcMustacheModuleIT_template.mustache")
-		public Model getTemplate() {
-			Model m = new Model();
-			m.setProp1("p1v");
-			m.setProp2(5649);
-			return m;
-		}
-		
-		@GET
-		@Path("/template_no_ext")
-		@Template(name = "MvcMustacheModuleIT_template")
-		public Model getTemplateNoExt() {
-			Model m = new Model();
-			m.setProp1("p1vv");
-			m.setProp2(56490);
-			return m;
-		}
-
-		@GET
-		@Path("/viewable")
-		public Viewable getViewable() {
+		@Path("/v1")
+		public ConcreteView getV1() {
 			Model m = new Model();
 			m.setProp1("p1");
 			m.setProp2(564);
-			return new Viewable("MvcMustacheModuleIT_viewable.mustache", m);
+			return new ConcreteView("MvcMustacheModuleIT_v1.mustache", m);
+		}
+
+		@GET
+		@Path("/v2")
+		public ConcreteView getV2() {
+			Model m = new Model();
+			m.setProp1("p2");
+			m.setProp2(5649);
+			return new ConcreteView("MvcMustacheModuleIT_v2.mustache", m);
+		}
+	}
+
+	public static class ConcreteView extends AbstractView {
+
+		private Model model;
+
+		public ConcreteView(String template, Model model) {
+			super(template);
+			this.model = model;
+		}
+
+		public Model getModel() {
+			return model;
 		}
 	}
 
