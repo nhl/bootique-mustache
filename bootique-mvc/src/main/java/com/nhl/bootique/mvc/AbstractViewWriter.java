@@ -57,6 +57,8 @@ public class AbstractViewWriter implements MessageBodyWriter<AbstractView> {
 		Writer out = new OutputStreamWriter(entityStream, t.getEncoding());
 		Template template = templateResolver.resolve(t.getTemplateName(), resourceInfoProvider.get());
 		templateRendererFactory.getRenderer(template).render(out, template, t);
+
+		// flush but do not close the underlying stream
 		out.flush();
 	}
 

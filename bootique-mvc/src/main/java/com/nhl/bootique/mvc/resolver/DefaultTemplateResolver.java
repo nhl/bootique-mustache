@@ -5,6 +5,8 @@ import static java.util.Arrays.asList;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Objects;
 
 import javax.ws.rs.container.ResourceInfo;
 
@@ -12,13 +14,15 @@ import com.nhl.bootique.mvc.Template;
 
 public class DefaultTemplateResolver implements TemplateResolver {
 
+	private Charset templateEncoding;
 	private String templateBase;
 	private TemplateLocator templateLocator;
 
-	public DefaultTemplateResolver(String templateBase) {
+	public DefaultTemplateResolver(String templateBase, Charset templateEncoding) {
 		templateBase = normalizeTemplateBase(templateBase);
 		this.templateBase = normalizeTemplateBase(templateBase);
 		this.templateLocator = createTemplateLocator(templateBase);
+		this.templateEncoding = Objects.requireNonNull(templateEncoding, "Null templateEncoding");
 	}
 
 	@Override
@@ -26,13 +30,19 @@ public class DefaultTemplateResolver implements TemplateResolver {
 
 		String path = resourcePath(templateName, resourceInfo.getResourceClass());
 
-		// TODO: cache templates...
-
+		// template is a lazy, no need to cache it... Template rendering
+		// providers should probably take care of caching of precompiled
+		// templates
 		return new Template() {
 
 			@Override
 			public URL getUrl() {
 				return templateLocator.templateUrl(path);
+			}
+
+			@Override
+			public Charset getEncoding() {
+				return templateEncoding;
 			}
 
 			@Override

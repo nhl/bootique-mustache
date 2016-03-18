@@ -1,13 +1,18 @@
 package com.nhl.bootique.mvc.resolver;
 
+import java.nio.charset.Charset;
+import java.util.Objects;
+
 public class DefaultTemplateResolverFactory {
 
 	static final String CLASSPATH_URL_PREFIX = "classpath:";
 
 	private String templateBase;
+	private Charset templateEncoding;
 
 	public DefaultTemplateResolverFactory() {
 		this.templateBase = CLASSPATH_URL_PREFIX;
+		this.templateEncoding = Charset.forName("UTF-8");
 	}
 
 	/**
@@ -28,7 +33,17 @@ public class DefaultTemplateResolverFactory {
 		this.templateBase = templateBase != null ? templateBase : "";
 	}
 
+	/**
+	 * Sets template encoding. Default is UTF-8.
+	 * 
+	 * @param templateEncoding
+	 *            expected encoding of templates.
+	 */
+	public void setTemplateEncoding(String templateEncoding) {
+		this.templateEncoding = Charset.forName(Objects.requireNonNull(templateEncoding));
+	}
+
 	public DefaultTemplateResolver createResolver() {
-		return new DefaultTemplateResolver(templateBase);
+		return new DefaultTemplateResolver(templateBase, templateEncoding);
 	}
 }
