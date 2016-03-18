@@ -1,3 +1,3 @@
 [![Build Status](https://travis-ci.org/nhl/bootique-mvc.svg)](https://travis-ci.org/nhl/bootique-mvc)
 
-A simple REST-based MVC web framework for [Bootique](http://bootique.io), integrating various templating engines, such as [Mustache](https://mustache.github.io/).
+A simple MVC web framework for [Bootique](http://bootique.io). Uses JAX-RS (and bootique-jersey) for processing requests and allows to integrate various templating engines for rendering dynamic responses. Currently provides integration with [Mustache](https://mustache.github.io/) templating. This framework is suitable for simple HTML UIs, where server-side rendering is minimal (e.g. when most of the UI work is done on the client with JavaScript). For advanced server-side rendering, you may consider JSF, Apache Tapestry and such.
