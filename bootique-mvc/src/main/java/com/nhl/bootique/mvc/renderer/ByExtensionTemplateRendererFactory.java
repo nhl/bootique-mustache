@@ -15,7 +15,7 @@ public class ByExtensionTemplateRendererFactory implements TemplateRendererFacto
 
 	@Override
 	public TemplateRenderer getRenderer(Template template) {
-		String ext = getExtension(template.getPath());
+		String ext = getExtension(template.getName());
 		TemplateRenderer renderer = renderersByExtension.get(ext);
 		if (renderer == null) {
 			throw new IllegalArgumentException("Unsupported template extension: " + ext + ", supported extensions: "

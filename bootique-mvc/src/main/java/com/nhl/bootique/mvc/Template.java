@@ -1,6 +1,10 @@
 package com.nhl.bootique.mvc;
 
+import java.net.URL;
+
 public interface Template {
 
-	String getPath();
+	String getName();
+	
+	URL getUrl();
 }

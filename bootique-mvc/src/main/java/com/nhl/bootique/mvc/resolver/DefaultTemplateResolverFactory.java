@@ -2,10 +2,12 @@ package com.nhl.bootique.mvc.resolver;
 
 public class DefaultTemplateResolverFactory {
 
+	static final String CLASSPATH_URL_PREFIX = "classpath:";
+
 	private String templateBase;
 
 	public DefaultTemplateResolverFactory() {
-		this.templateBase = "classpath:";
+		this.templateBase = CLASSPATH_URL_PREFIX;
 	}
 
 	/**

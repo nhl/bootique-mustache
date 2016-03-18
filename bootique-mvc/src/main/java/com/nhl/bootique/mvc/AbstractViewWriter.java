@@ -6,8 +6,12 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Objects;
 
+import javax.inject.Provider;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
@@ -19,6 +23,12 @@ public class AbstractViewWriter implements MessageBodyWriter<AbstractView> {
 
 	private TemplateResolver templateResolver;
 	private TemplateRendererFactory templateRendererFactory;
+
+	// TODO dirty ... other properties are set in constructor, but this one
+	// awaits injection. So the object is in a partial state for the part of its
+	// lifecycle...
+	@Context
+	private Provider<ResourceInfo> resourceInfoProvider;
 
 	public AbstractViewWriter(TemplateResolver templateResolver, TemplateRendererFactory templateRendererFactory) {
 		this.templateResolver = templateResolver;
@@ -41,9 +51,13 @@ public class AbstractViewWriter implements MessageBodyWriter<AbstractView> {
 			MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
 					throws IOException, WebApplicationException {
 
+		// doublecheck injection....
+		Objects.requireNonNull(resourceInfoProvider, "'resourceInfoProvider' was not injected");
+
 		Writer out = new OutputStreamWriter(entityStream, t.getEncoding());
-		Template template = templateResolver.resolve(t.getTemplateName());
+		Template template = templateResolver.resolve(t.getTemplateName(), resourceInfoProvider.get());
 		templateRendererFactory.getRenderer(template).render(out, template, t);
+		out.flush();
 	}
 
 }
