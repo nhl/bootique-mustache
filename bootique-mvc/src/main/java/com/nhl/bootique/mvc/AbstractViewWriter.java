@@ -55,7 +55,7 @@ public class AbstractViewWriter implements MessageBodyWriter<AbstractView> {
 		Objects.requireNonNull(resourceInfoProvider, "'resourceInfoProvider' was not injected");
 
 		Writer out = new OutputStreamWriter(entityStream, t.getEncoding());
-		Template template = templateResolver.resolve(t.getTemplateName(), resourceInfoProvider.get());
+		Template template = templateResolver.resolve(t.getTemplateName(), t.getClass());
 		templateRendererFactory.getRenderer(template).render(out, template, t);
 
 		// flush but do not close the underlying stream

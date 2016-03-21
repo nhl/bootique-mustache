@@ -8,8 +8,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
-import javax.ws.rs.container.ResourceInfo;
-
 import com.nhl.bootique.mvc.Template;
 
 public class DefaultTemplateResolver implements TemplateResolver {
@@ -26,9 +24,9 @@ public class DefaultTemplateResolver implements TemplateResolver {
 	}
 
 	@Override
-	public Template resolve(String templateName, ResourceInfo resourceInfo) {
+	public Template resolve(String templateName, Class<?> viewType) {
 
-		String path = resourcePath(templateName, resourceInfo.getResourceClass());
+		String path = resourcePath(templateName, viewType);
 
 		// template is a lazy, no need to cache it... Template rendering
 		// providers should probably take care of caching of precompiled
@@ -52,15 +50,15 @@ public class DefaultTemplateResolver implements TemplateResolver {
 		};
 	}
 
-	protected String resourcePath(String templateName, Class<?> resourceType) {
+	protected String resourcePath(String templateName, Class<?> viewType) {
 
-		// path = templateBase + resourcePackagePath + templateNameWithExt
+		// path = templateBase + viewPackagePath + templateNameWithExt
 
 		if (templateName.startsWith("/")) {
 			templateName = templateName.substring(1);
 		}
 
-		Package pack = resourceType.getPackage();
+		Package pack = viewType.getPackage();
 		String packagePath = pack != null ? pack.getName().replace('.', '/') + "/" : "";
 
 		StringBuilder path = new StringBuilder(templateBase);

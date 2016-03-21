@@ -22,7 +22,7 @@ import org.junit.Test;
 import com.nhl.bootique.BQRuntime;
 import com.nhl.bootique.Bootique;
 import com.nhl.bootique.jersey.JerseyModule;
-import com.nhl.bootique.mvc.AbstractView;
+import com.nhl.bootique.mvc.mustache.view.ConcreteView;
 import com.nhl.bootique.test.junit.BQDaemonTestFactory;
 
 public class MvcMustacheModuleIT {
@@ -76,20 +76,6 @@ public class MvcMustacheModuleIT {
 			m.setProp1("p2");
 			m.setProp2(5649);
 			return new ConcreteView("MvcMustacheModuleIT_v2.mustache", m);
-		}
-	}
-
-	public static class ConcreteView extends AbstractView {
-
-		private Model model;
-
-		public ConcreteView(String template, Model model) {
-			super(template);
-			this.model = model;
-		}
-
-		public Model getModel() {
-			return model;
 		}
 	}
 
