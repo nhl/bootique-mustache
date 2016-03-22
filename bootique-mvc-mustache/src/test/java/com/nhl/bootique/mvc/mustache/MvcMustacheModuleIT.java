@@ -3,7 +3,6 @@ package com.nhl.bootique.mvc.mustache;
 import static org.junit.Assert.assertEquals;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,21 +13,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.eclipse.jetty.server.Server;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import com.nhl.bootique.BQRuntime;
 import com.nhl.bootique.Bootique;
 import com.nhl.bootique.jersey.JerseyModule;
+import com.nhl.bootique.jetty.test.junit.JettyTestFactory;
 import com.nhl.bootique.mvc.mustache.view.ConcreteView;
-import com.nhl.bootique.test.junit.BQDaemonTestFactory;
 
 public class MvcMustacheModuleIT {
 
 	@ClassRule
-	public static BQDaemonTestFactory testFactory = new BQDaemonTestFactory();
+	public static JettyTestFactory TEST_SERVER = new JettyTestFactory();
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -36,8 +33,7 @@ public class MvcMustacheModuleIT {
 		JerseyModule jersey = JerseyModule.builder().resource(Api.class).build();
 
 		Consumer<Bootique> configurator = bq -> bq.autoLoadModules().module(jersey);
-		Function<BQRuntime, Boolean> startupCheck = r -> r.getInstance(Server.class).isStarted();
-		testFactory.newRuntime().configurator(configurator).startupCheck(startupCheck).start("--server");
+		TEST_SERVER.newRuntime().configurator(configurator).startServer();
 	}
 
 	@Test

@@ -20,6 +20,7 @@
 	</modules>
 	<properties>
 		<bootique-version>0.15-SNAPSHOT</bootique-version>
+		<bootique-jetty-version>0.13-SNAPSHOT</bootique-jetty-version>
 		<bootique-jersey-version>0.14-SNAPSHOT</bootique-jersey-version>
 	</properties>
 	<scm>
@@ -38,6 +39,11 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
 				<version>1.7.13</version>
+			</dependency>
+			<dependency>
+				<groupId>com.nhl.bootique.jetty</groupId>
+				<artifactId>bootique-jetty-test</artifactId>
+				<version>${bootique-jetty-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.nhl.bootique.jersey</groupId>
@@ -67,6 +73,11 @@
 		<dependency>
 			<groupId>com.nhl.bootique</groupId>
 			<artifactId>bootique-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.nhl.bootique.jetty</groupId>
+			<artifactId>bootique-jetty-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
