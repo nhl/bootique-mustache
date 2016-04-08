@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.nhl.bootique.mvc</groupId>
 	<artifactId>bootique-mvc-parent</artifactId>
-	<version>0.1</version>
+	<version>0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>REST-based MVC web framework for Bootique with pluggable templating engines</name>
 	<description>Provides a REST-based MVC web framework for Bootique with pluggable templating engines.</description>
@@ -25,7 +25,7 @@
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com/nhl/bootique-mvc</developerConnection>
 		<url>https://github.com/nhl/bootique-mvc</url>
-		<tag>bootique-mvc-parent-0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<dependencyManagement>
 		<dependencies>
