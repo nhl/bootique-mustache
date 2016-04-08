@@ -3,15 +3,15 @@ package com.nhl.bootique.mvc.resolver;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
+import com.nhl.bootique.resource.ResourceFactory;
+
 public class DefaultTemplateResolverFactory {
 
-	static final String CLASSPATH_URL_PREFIX = "classpath:";
-
-	private String templateBase;
+	private ResourceFactory templateBase;
 	private Charset templateEncoding;
 
 	public DefaultTemplateResolverFactory() {
-		this.templateBase = CLASSPATH_URL_PREFIX;
+		this.templateBase = new ResourceFactory("");
 		this.templateEncoding = Charset.forName("UTF-8");
 	}
 
@@ -29,8 +29,8 @@ public class DefaultTemplateResolverFactory {
 	 * @param templateBase
 	 *            A base location of templates.
 	 */
-	public void setTemplateBase(String templateBase) {
-		this.templateBase = templateBase != null ? templateBase : "";
+	public void setTemplateBase(ResourceFactory templateBase) {
+		this.templateBase = Objects.requireNonNull(templateBase);
 	}
 
 	/**
