@@ -3,15 +3,15 @@ package com.nhl.bootique.mvc.resolver;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
-import com.nhl.bootique.resource.ResourceFactory;
+import com.nhl.bootique.resource.FolderResourceFactory;
 
 public class DefaultTemplateResolverFactory {
 
-	private ResourceFactory templateBase;
+	private FolderResourceFactory templateBase;
 	private Charset templateEncoding;
 
 	public DefaultTemplateResolverFactory() {
-		this.templateBase = new ResourceFactory("");
+		this.templateBase = new FolderResourceFactory("");
 		this.templateEncoding = Charset.forName("UTF-8");
 	}
 
@@ -29,7 +29,7 @@ public class DefaultTemplateResolverFactory {
 	 * @param templateBase
 	 *            A base location of templates.
 	 */
-	public void setTemplateBase(ResourceFactory templateBase) {
+	public void setTemplateBase(FolderResourceFactory templateBase) {
 		this.templateBase = Objects.requireNonNull(templateBase);
 	}
 
