@@ -19,8 +19,8 @@
 	</modules>
 	<properties>
 		<bootique-version>0.15</bootique-version>
-		<bootique-jetty-version>0.13</bootique-jetty-version>
-		<bootique-jersey-version>0.14</bootique-jersey-version>
+		<bootique-jetty-version>0.14-SNAPSHOT</bootique-jetty-version>
+		<bootique-jersey-version>0.15-SNAPSHOT</bootique-jersey-version>
 	</properties>
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com/nhl/bootique-mvc</developerConnection>

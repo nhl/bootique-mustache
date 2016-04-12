@@ -1,3 +1,7 @@
+## 0.2
+
+* #6 Upgrade to bootique-jetty 0.14
+
 ## 0.1
 
 * #1 Mustache Integration
