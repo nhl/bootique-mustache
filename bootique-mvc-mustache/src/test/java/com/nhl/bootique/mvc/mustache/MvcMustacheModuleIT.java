@@ -30,9 +30,8 @@ public class MvcMustacheModuleIT {
 	@BeforeClass
 	public static void beforeClass() {
 
-		JerseyModule jersey = JerseyModule.builder().resource(Api.class).build();
-
-		Consumer<Bootique> configurator = bq -> bq.autoLoadModules().module(jersey);
+		Consumer<Bootique> configurator = bq -> bq.autoLoadModules()
+				.module(binder -> JerseyModule.contributeResources(binder).addBinding().to(Api.class));
 		TEST_SERVER.newRuntime().configurator(configurator).startServer();
 	}
 
