@@ -18,9 +18,9 @@
 		<module>bootique-mvc-mustache</module>
 	</modules>
 	<properties>
-		<bootique-version>0.15</bootique-version>
-		<bootique-jetty-version>0.14-SNAPSHOT</bootique-jetty-version>
-		<bootique-jersey-version>0.15-SNAPSHOT</bootique-jersey-version>
+		<bootique-version>0.16</bootique-version>
+		<bootique-jetty-version>0.14</bootique-jetty-version>
+		<bootique-jersey-version>0.15</bootique-jersey-version>
 	</properties>
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com/nhl/bootique-mvc</developerConnection>
