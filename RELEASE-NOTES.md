@@ -1,3 +1,7 @@
+## 0.3
+
+* #7 Upgrade to the latest FolderResourceFactory for more reliable template resolution
+
 ## 0.2
 
 * #6 Upgrade to bootique-jetty 0.14

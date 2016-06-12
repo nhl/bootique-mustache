@@ -1,101 +1,107 @@
 package com.nhl.bootique.mvc.resolver;
 
-import static org.junit.Assert.assertEquals;
-
-import java.nio.charset.Charset;
-
+import com.nhl.bootique.resource.FolderResourceFactory;
 import org.junit.Test;
 
-import com.nhl.bootique.resource.ResourceFactory;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import static org.junit.Assert.assertEquals;
 
 public class DefaultTemplateResolverTest {
 
-	private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+    private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-	private DefaultTemplateResolver resolver(String basePath) {
-		return new DefaultTemplateResolver(new ResourceFactory(basePath), DEFAULT_CHARSET);
-	}
+    private DefaultTemplateResolver resolver(String basePath) {
+        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), DEFAULT_CHARSET);
+    }
 
-	private String baseCPAsFileUrl() {
-		// TODO: windows
-		return baseFileUrl() + "target/test-classes/";
-	}
+    private String baseCPAsFileUrl() {
+        // TODO: windows
+        return baseFileUrl() + "target/test-classes/";
+    }
 
-	private String baseFileUrl() {
-		// TODO: windows
-		return "file:" + System.getProperty("user.dir") + "/";
-	}
+    private String baseFileUrl() {
+        // TODO: windows
+        return "file:" + System.getProperty("user.dir") + "/";
+    }
 
-	@Test
-	public void testResourcePath_EmptyBase() {
+    @Test
+    public void testResourcePath_EmptyBase() {
 
-		DefaultTemplateResolver resolver = resolver("");
+        DefaultTemplateResolver resolver = resolver("");
 
-		assertEquals(baseFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-		assertEquals(baseFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-	}
+        assertEquals(baseFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        assertEquals(baseFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+    }
 
-	@Test
-	public void testResourcePath_FilePathBase() {
+    @Test
+    public void testResourcePath_FilePathBase() throws IOException {
 
-		DefaultTemplateResolver resolver = resolver("/tmp");
+        DefaultTemplateResolver resolver = resolver("/tmp");
 
-		assertEquals("file:/tmp/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-		assertEquals("file:/tmp/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-	}
+        File canonical = new File("/tmp/com/nhl/bootique/mvc/resolver/tName.txt").getCanonicalFile();
 
-	@Test
-	public void testResourcePath_FilePathBase_Slash() {
+        assertEquals(canonical.toURI().toURL(),
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class));
+        assertEquals(canonical.toURI().toURL(),
+                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class));
+    }
 
-		DefaultTemplateResolver resolver = resolver("/tmp/");
+    @Test
+    public void testResourcePath_FilePathBase_Slash() throws IOException {
 
-		assertEquals("file:/tmp/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-		assertEquals("file:/tmp/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-	}
+        DefaultTemplateResolver resolver = resolver("/tmp/");
 
-	@Test
-	public void testResourcePath_UrlBase() {
+        File canonical = new File("/tmp/com/nhl/bootique/mvc/resolver/tName.txt").getCanonicalFile();
 
-		DefaultTemplateResolver resolver = resolver("http://example.org/a");
+        assertEquals(canonical.toURI().toURL(),
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class));
+        assertEquals(canonical.toURI().toURL(),
+                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class));
+    }
 
-		assertEquals("http://example.org/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-		assertEquals("http://example.org/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-	}
+    @Test
+    public void testResourcePath_UrlBase() {
 
-	@Test
-	public void testResourcePath_UrlBase_Slash() {
+        DefaultTemplateResolver resolver = resolver("http://example.org/a");
 
-		DefaultTemplateResolver resolver = resolver("http://example.org/a/");
+        assertEquals("http://example.org/a/com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        assertEquals("http://example.org/a/com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+    }
 
-		assertEquals("http://example.org/a/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-		assertEquals("http://example.org/a/com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-	}
+    @Test
+    public void testResourcePath_UrlBase_Slash() {
 
-	@Test
-	public void testResourcePath_ClasspathBase() {
+        DefaultTemplateResolver resolver = resolver("http://example.org/a/");
 
-		DefaultTemplateResolver resolver = resolver("classpath:");
+        assertEquals("http://example.org/a/com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        assertEquals("http://example.org/a/com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+    }
 
-		assertEquals(baseCPAsFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-		assertEquals(baseCPAsFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
-				resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-	}
+    @Test
+    public void testResourcePath_ClasspathBase() {
 
-	@Test(expected = RuntimeException.class)
-	public void testResourcePath_ClasspathBase_Slash() {
-		DefaultTemplateResolver resolver = resolver("classpath:/");
-		resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class);
-	}
+        DefaultTemplateResolver resolver = resolver("classpath:");
+
+        assertEquals(baseCPAsFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        assertEquals(baseCPAsFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+    }
+
+    @Test
+    public void testResourcePath_ClasspathBase_Slash() {
+        DefaultTemplateResolver resolver = resolver("classpath:/");
+        assertEquals(baseCPAsFileUrl() + "com/nhl/bootique/mvc/resolver/tName.txt",
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+    }
 
 }
