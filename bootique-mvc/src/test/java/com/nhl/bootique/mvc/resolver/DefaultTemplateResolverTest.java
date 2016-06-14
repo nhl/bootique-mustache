@@ -22,7 +22,6 @@ public class DefaultTemplateResolverTest {
     }
 
     private String baseCPAsFileUrl() {
-        // TODO: windows
         try {
             return new URL(baseFileUrl() + "target/test-classes/").toExternalForm();
         } catch (MalformedURLException e) {
