@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 
 import static org.junit.Assert.assertEquals;
@@ -19,12 +23,19 @@ public class DefaultTemplateResolverTest {
 
     private String baseCPAsFileUrl() {
         // TODO: windows
-        return baseFileUrl() + "target/test-classes/";
+        try {
+            return new URL(baseFileUrl() + "target/test-classes/").toExternalForm();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Unexpected error", e);
+        }
     }
 
     private String baseFileUrl() {
-        // TODO: windows
-        return "file:" + System.getProperty("user.dir") + "/";
+        try {
+            return new URI(FolderResourceFactory.getUserDir()).toURL().toExternalForm() + "/";
+        } catch (MalformedURLException | URISyntaxException e) {
+            throw new RuntimeException("Unexpected error", e);
+        }
     }
 
     @Test
