@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>bootique-mvc-mustache</artifactId>
 	<packaging>jar</packaging>
-	<name>Bootique MVC with Mustache Templates</name>
+	<name>bootique-mvc-mustache: Bootique MVC implementation based on Mustache.</name>
 	<description>Provides Mustache integration as a template engine for Bootique MVC.</description>
 
 	<dependencyManagement>

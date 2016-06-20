@@ -9,8 +9,8 @@
 	</parent>
 	<artifactId>bootique-mvc</artifactId>
 	<packaging>jar</packaging>
-	<name>Bootique MVC Basic Definitions</name>
-	<description>Provides basic definitions of Bootique MVC.</description>
+	<name>bootique-mvc: Bootique MVC basic definitions</name>
+	<description>Provides basic abstractions for web MVC in Bootique.</description>
 
 	<dependencies>
 		<!-- Compile dependencies -->

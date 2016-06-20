@@ -11,8 +11,8 @@
 	<artifactId>bootique-mvc-parent</artifactId>
 	<version>0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>REST-based MVC web framework for Bootique with pluggable templating engines</name>
-	<description>Provides a REST-based MVC web framework for Bootique with pluggable templating engines.</description>
+	<name>bootique-mvc-parent: </name>
+	<description>A parent of Bootoque MVC modules.</description>
 	<modules>
 		<module>bootique-mvc</module>
 		<module>bootique-mvc-mustache</module>
