@@ -1,3 +1,7 @@
+## 0.4
+
+* #9 Move to io.bootique namespace
+
 ## 0.3
 
 * #7 Upgrade to the latest FolderResourceFactory for more reliable template resolution
