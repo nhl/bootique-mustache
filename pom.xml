@@ -2,11 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
-		<groupId>io.bootique.parent</groupId>
-		<artifactId>bootique-parent</artifactId>
-		<version>0.12</version>
+		<groupId>io.bootique.modules.parent</groupId>
+		<artifactId>bootique-modules-parent</artifactId>
+		<version>0.2</version>
 	</parent>
+
 	<groupId>io.bootique.mvc</groupId>
 	<artifactId>bootique-mvc-parent</artifactId>
 	<version>0.4-SNAPSHOT</version>
@@ -22,11 +24,6 @@
 		<bootique-jetty-version>0.17-SNAPSHOT</bootique-jetty-version>
 		<bootique-jersey-version>0.18-SNAPSHOT</bootique-jersey-version>
 	</properties>
-	<scm>
-		<developerConnection>scm:git:ssh://git@github.com/bootique/bootique-mvc</developerConnection>
-		<url>https://github.com/bootique/bootique-mvc</url>
-		<tag>HEAD</tag>
-	</scm>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
