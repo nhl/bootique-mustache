@@ -28,7 +28,7 @@ public class MvcMustacheModuleIT {
 	@BeforeClass
 	public static void beforeClass() {
 
-		Consumer<Bootique> configurator = bq -> bq.autoLoadModules()
+		Consumer<Bootique> configurator = bq -> bq.args("--config=classpath:MvcMustacheModuleIT.yml").autoLoadModules()
 				.module(binder -> JerseyModule.contributeResources(binder).addBinding().to(Api.class));
 		TEST_SERVER.newRuntime().configurator(configurator).startServer();
 	}
