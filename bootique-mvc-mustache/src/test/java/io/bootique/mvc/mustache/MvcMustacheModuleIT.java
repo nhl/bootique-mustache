@@ -29,7 +29,7 @@ public class MvcMustacheModuleIT {
                 .args("--config=classpath:MvcMustacheModuleIT.yml")
                 .autoLoadModules()
                 .module(binder -> JerseyModule.contributeResources(binder).addBinding().to(Api.class))
-                .startServer();
+                .start();
     }
 
     @Test
