@@ -1,3 +1,7 @@
+## 0.6
+
+* #11 Upgrade to BQ 0.22 and add config documentation.
+
 ## 0.5
 
 * #10 Upgrade to Bootique 0.20

@@ -10,7 +10,7 @@ import io.bootique.jersey.JerseyModule;
 import io.bootique.mvc.renderer.ByExtensionTemplateRendererFactory;
 import io.bootique.mvc.renderer.TemplateRenderer;
 import io.bootique.mvc.renderer.TemplateRendererFactory;
-import io.bootique.mvc.resolver.DefaultTemplateResolverFactory;
+import io.bootique.mvc.resolver.TemplateResolverFactory;
 import io.bootique.mvc.resolver.TemplateResolver;
 
 import java.util.Map;
@@ -45,6 +45,6 @@ public class MvcModule extends ConfigModule {
 	@Singleton
 	@Provides
 	TemplateResolver createTemplateResolver(ConfigurationFactory configurationFactory) {
-		return configurationFactory.config(DefaultTemplateResolverFactory.class, configPrefix).createResolver();
+		return configurationFactory.config(TemplateResolverFactory.class, configPrefix).createResolver();
 	}
 }
