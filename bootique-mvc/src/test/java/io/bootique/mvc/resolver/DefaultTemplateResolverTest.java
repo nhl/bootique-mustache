@@ -5,7 +5,10 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,29 +16,16 @@ public class DefaultTemplateResolverTest {
 
     private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-    private DefaultTemplateResolver resolver(String basePath) {
-        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), DEFAULT_CHARSET);
-    }
-
-    private String baseCPAsFileUrl() {
-        // TODO: windows
-        return baseFileUrl() + "target/test-classes/";
-    }
-
-    private String baseFileUrl() {
-        // TODO: windows
-        return "file:" + System.getProperty("user.dir") + "/";
-    }
-
     @Test
-    public void testResourcePath_EmptyBase() {
+    public void testResourcePath_EmptyBase()
+            throws MalformedURLException
+    {
 
         DefaultTemplateResolver resolver = resolver("");
 
-        assertEquals(baseFileUrl() + "io/bootique/mvc/resolver/tName.txt",
-                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-        assertEquals(baseFileUrl() + "io/bootique/mvc/resolver/tName.txt",
-                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        URL expected = baseUrl("io/bootique/mvc/resolver/tName.txt");
+        assertEquals(expected, resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class));
+        assertEquals(expected, resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class));
     }
 
     @Test
@@ -87,21 +77,39 @@ public class DefaultTemplateResolverTest {
     }
 
     @Test
-    public void testResourcePath_ClasspathBase() {
+    public void testResourcePath_ClasspathBase()
+            throws MalformedURLException
+    {
 
         DefaultTemplateResolver resolver = resolver("classpath:");
 
-        assertEquals(baseCPAsFileUrl() + "io/bootique/mvc/resolver/tName.txt",
-                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
-        assertEquals(baseCPAsFileUrl() + "io/bootique/mvc/resolver/tName.txt",
-                resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        URL expected = baseClasspathUrl("io/bootique/mvc/resolver/tName.txt");
+        assertEquals(expected, resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class));
+        assertEquals(expected, resolver.resourceUrl("/tName.txt", DefaultTemplateResolverTest.class));
     }
 
     @Test
-    public void testResourcePath_ClasspathBase_Slash() {
+    public void testResourcePath_ClasspathBase_Slash()
+            throws MalformedURLException
+    {
         DefaultTemplateResolver resolver = resolver("classpath:/");
-        assertEquals(baseCPAsFileUrl() + "io/bootique/mvc/resolver/tName.txt",
-                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class).toExternalForm());
+        assertEquals(baseClasspathUrl("io/bootique/mvc/resolver/tName.txt"),
+                resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class));
     }
 
+    private DefaultTemplateResolver resolver(String basePath) {
+        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), DEFAULT_CHARSET);
+    }
+
+    private URL baseClasspathUrl(String resourceRelativePath)
+            throws MalformedURLException
+    {
+        return baseUrl("target/test-classes/", resourceRelativePath);
+    }
+
+    private URL baseUrl(String ... relativePaths)
+            throws MalformedURLException
+    {
+        return Paths.get(System.getProperty("user.dir"), relativePaths).toUri().toURL();
+    }
 }
