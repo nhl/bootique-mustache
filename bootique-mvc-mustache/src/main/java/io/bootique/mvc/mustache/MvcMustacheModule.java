@@ -8,7 +8,7 @@ public class MvcMustacheModule extends ConfigModule {
 
 	@Override
 	public void configure(Binder binder) {
-		MvcModule.contributeRenderers(binder).addBinding(".mustache").to(MustacheTemplateRenderer.class);
+		MvcModule.extend(binder).setRenderer(".mustache", MustacheTemplateRenderer.class);
 	}
 
 }

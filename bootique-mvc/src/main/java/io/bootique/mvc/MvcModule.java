@@ -17,34 +17,50 @@ import java.util.Map;
 
 public class MvcModule extends ConfigModule {
 
-	public static MapBinder<String, TemplateRenderer> contributeRenderers(Binder binder) {
-		return MapBinder.newMapBinder(binder, String.class, TemplateRenderer.class);
-	}
+    /**
+     * Returns an instance of {@link MvcModuleExtender} used by downstream modules to load custom extensions to the
+     * MvcModule. Should be invoked from a downstream Module's "configure" method.
+     *
+     * @param binder DI binder passed to the Module that invokes this method.
+     * @return an instance of {@link MvcModuleExtender} that can be used to load custom extensions to the MvcModule.
+     * @since 0.6
+     */
+    public static MvcModuleExtender extend(Binder binder) {
+        return new MvcModuleExtender(binder);
+    }
 
-	@Override
-	public void configure(Binder binder) {
+    /**
+     * @param binder DI binder passed to the Module that invokes this method.
+     * @return returns a {@link MapBinder} for contributed template renderers.
+     * @deprecated since 0.14 use {@link #extend(Binder)} to get an extender object, and
+     * then call {@link MvcModuleExtender#setRenderer(String, Class)} or similar.
+     */
+    @Deprecated
+    public static MapBinder<String, TemplateRenderer> contributeRenderers(Binder binder) {
+        return MapBinder.newMapBinder(binder, String.class, TemplateRenderer.class);
+    }
 
-		JerseyModule.contributeFeatures(binder).addBinding().to(MvcFeature.class);
+    @Override
+    public void configure(Binder binder) {
+        JerseyModule.extend(binder).addFeature(MvcFeature.class);
+        MvcModule.extend(binder).initAllExtensions();
+    }
 
-		// bootstrap collections
-		MvcModule.contributeRenderers(binder);
-	}
+    @Singleton
+    @Provides
+    MvcFeature createMvcFeature(TemplateResolver templateResolver, TemplateRendererFactory templateRendererFactory) {
+        return new MvcFeature(templateResolver, templateRendererFactory);
+    }
 
-	@Singleton
-	@Provides
-	MvcFeature createMvcFeature(TemplateResolver templateResolver, TemplateRendererFactory templateRendererFactory) {
-		return new MvcFeature(templateResolver, templateRendererFactory);
-	}
+    @Singleton
+    @Provides
+    TemplateRendererFactory createTemplateRendererFactory(Map<String, TemplateRenderer> renderersByExtension) {
+        return new ByExtensionTemplateRendererFactory(renderersByExtension);
+    }
 
-	@Singleton
-	@Provides
-	TemplateRendererFactory createTemplateRendererFactory(Map<String, TemplateRenderer> renderersByExtension) {
-		return new ByExtensionTemplateRendererFactory(renderersByExtension);
-	}
-
-	@Singleton
-	@Provides
-	TemplateResolver createTemplateResolver(ConfigurationFactory configurationFactory) {
-		return configurationFactory.config(TemplateResolverFactory.class, configPrefix).createResolver();
-	}
+    @Singleton
+    @Provides
+    TemplateResolver createTemplateResolver(ConfigurationFactory configurationFactory) {
+        return configurationFactory.config(TemplateResolverFactory.class, configPrefix).createResolver();
+    }
 }

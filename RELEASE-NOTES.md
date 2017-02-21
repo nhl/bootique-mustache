@@ -1,6 +1,6 @@
 ## 0.6
 
-* #11 Upgrade to BQ 0.22 and add config documentation.
+* #11 Upgrade to BQ 0.22
 
 ## 0.5
 
