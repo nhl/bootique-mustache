@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.bootique.mvc</groupId>
 		<artifactId>bootique-mvc-parent</artifactId>
-		<version>0.6-SNAPSHOT</version>
+		<version>0.6</version>
 	</parent>
 	<artifactId>bootique-mvc-mustache</artifactId>
 	<packaging>jar</packaging>
