@@ -28,7 +28,7 @@ public class MvcMustacheModuleIT {
         TEST_SERVER.app()
                 .args("--config=classpath:MvcMustacheModuleIT.yml")
                 .autoLoadModules()
-                .module(binder -> JerseyModule.contributeResources(binder).addBinding().to(Api.class))
+                .module(binder -> JerseyModule.extend(binder).addResource(Api.class))
                 .start();
     }
 
