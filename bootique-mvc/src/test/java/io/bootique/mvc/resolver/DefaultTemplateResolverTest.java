@@ -98,7 +98,7 @@ public class DefaultTemplateResolverTest {
     }
 
     private DefaultTemplateResolver resolver(String basePath) {
-        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), DEFAULT_CHARSET);
+        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), false, DEFAULT_CHARSET);
     }
 
     private URL baseClasspathUrl(String resourceRelativePath)

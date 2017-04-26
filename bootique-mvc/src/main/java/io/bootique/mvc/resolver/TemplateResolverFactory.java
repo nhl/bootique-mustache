@@ -12,10 +12,12 @@ public class TemplateResolverFactory {
 
     private FolderResourceFactory templateBase;
     private Charset templateEncoding;
+    private boolean templateLocationAbsolute;
 
     public TemplateResolverFactory() {
         this.templateBase = new FolderResourceFactory("");
         this.templateEncoding = Charset.forName("UTF-8");
+        this.templateLocationAbsolute = false;
     }
 
     /**
@@ -47,7 +49,15 @@ public class TemplateResolverFactory {
         this.templateEncoding = Charset.forName(Objects.requireNonNull(templateEncoding));
     }
 
+    /**
+     * TODO: documentation
+     */
+    @BQConfigProperty("TODO: documentation")
+    public void setTemplateLocationAbsolute(boolean templateLocationAbsolute) {
+        this.templateLocationAbsolute = templateLocationAbsolute;
+    }
+
     public DefaultTemplateResolver createResolver() {
-        return new DefaultTemplateResolver(templateBase, templateEncoding);
+        return new DefaultTemplateResolver(templateBase, templateLocationAbsolute, templateEncoding);
     }
 }

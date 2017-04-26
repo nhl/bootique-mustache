@@ -1,0 +1,3 @@
+mvc:
+  templateBase: "classpath:templates/"
+  templateLocationAbsolute: true
