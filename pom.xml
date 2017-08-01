@@ -11,7 +11,7 @@
 
 	<groupId>io.bootique.mvc</groupId>
 	<artifactId>bootique-mvc-parent</artifactId>
-	<version>0.8-SNAPSHOT</version>
+	<version>0.24-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>bootique-mvc-parent: </name>
 	<description>A parent of Bootoque MVC modules.</description>
