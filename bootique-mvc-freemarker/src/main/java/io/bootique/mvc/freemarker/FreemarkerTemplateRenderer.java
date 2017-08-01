@@ -8,6 +8,9 @@ import io.bootique.mvc.renderer.TemplateRenderer;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * @author Lukasz Bachman
+ */
 public class FreemarkerTemplateRenderer implements TemplateRenderer {
 
 	private FreemarkerIntegrationService freemarkerIntegration;

@@ -20,6 +20,9 @@ import javax.ws.rs.core.Response.Status;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Lukasz Bachman
+ */
 public class MvcFreemarkerModuleIT {
 
 	@ClassRule

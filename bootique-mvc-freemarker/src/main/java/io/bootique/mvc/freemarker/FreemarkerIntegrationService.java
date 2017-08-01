@@ -21,6 +21,7 @@ class FreemarkerIntegrationService {
     private Configuration cfg = new Configuration(Configuration.getVersion());
 
     private Map<String, URL> urlMapping = new HashMap<>();
+    
     private final boolean readFromDirectory;
 
     @Inject

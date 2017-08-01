@@ -4,6 +4,9 @@ import com.google.inject.Module;
 import io.bootique.BQModule;
 import io.bootique.BQModuleProvider;
 
+/**
+ * @author Lukasz Bachman
+ */
 public class MvcFreemarkerModuleProvider implements BQModuleProvider {
 
 	@Override

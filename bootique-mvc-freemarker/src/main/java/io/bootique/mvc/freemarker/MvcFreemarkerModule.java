@@ -9,6 +9,9 @@ import io.bootique.mvc.resolver.TemplateResolver;
 
 import java.io.IOException;
 
+/**
+ * @author Lukasz Bachman
+ */
 public class MvcFreemarkerModule extends ConfigModule {
 
     @Override

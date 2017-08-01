@@ -4,6 +4,9 @@ import io.bootique.mvc.AbstractView;
 
 import java.util.Objects;
 
+/**
+ * @author Lukasz Bachman
+ */
 public class HelloWorldView extends AbstractView {
 
 	private final String firstName;

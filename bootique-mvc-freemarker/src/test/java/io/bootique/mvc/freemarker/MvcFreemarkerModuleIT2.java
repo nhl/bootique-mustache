@@ -20,6 +20,9 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Lukasz Bachman
+ */
 public class MvcFreemarkerModuleIT2 {
 
     @ClassRule
