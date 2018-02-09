@@ -3,9 +3,11 @@ package io.bootique.mvc;
 import com.google.inject.Module;
 import io.bootique.BQModule;
 import io.bootique.BQModuleProvider;
+import io.bootique.jersey.JerseyModuleProvider;
 import io.bootique.mvc.resolver.TemplateResolverFactory;
 
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -29,5 +31,12 @@ public class MvcModuleProvider implements BQModuleProvider {
         return BQModuleProvider.super
                 .moduleBuilder()
                 .description("Provides a REST-based web MVC engine with pluggable view renderers.");
+    }
+
+    @Override
+    public Collection<BQModuleProvider> dependencies() {
+        return Collections.singletonList(
+                new JerseyModuleProvider()
+        );
     }
 }
