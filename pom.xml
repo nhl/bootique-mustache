@@ -48,11 +48,6 @@
 				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.bootique.jetty</groupId>
-				<artifactId>bootique-jetty-test</artifactId>
-				<version>${bootique-version}</version>
-			</dependency>
-			<dependency>
 				<groupId>io.bootique.jersey</groupId>
 				<artifactId>bootique-jersey</artifactId>
 				<version>${bootique-version}</version>
@@ -80,11 +75,6 @@
 		<dependency>
 			<groupId>io.bootique</groupId>
 			<artifactId>bootique-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

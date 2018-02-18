@@ -1,8 +1,8 @@
 package io.bootique.mvc.mustache;
 
 import io.bootique.jersey.JerseyModule;
-import io.bootique.jetty.test.junit.JettyTestFactory;
 import io.bootique.mvc.mustache.view.ConcreteView;
+import io.bootique.test.junit.BQTestFactory;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -21,15 +21,15 @@ import static org.junit.Assert.assertEquals;
 public class MvcMustacheModuleIT {
 
     @ClassRule
-    public static JettyTestFactory TEST_SERVER = new JettyTestFactory();
+    public static BQTestFactory TEST_SERVER = new BQTestFactory();
 
     @BeforeClass
     public static void beforeClass() {
         TEST_SERVER.app()
-                .args("--config=classpath:MvcMustacheModuleIT.yml")
+                .args("--config=classpath:MvcMustacheModuleIT.yml", "-s")
                 .autoLoadModules()
                 .module(binder -> JerseyModule.extend(binder).addResource(Api.class))
-                .start();
+                .run();
     }
 
     @Test
