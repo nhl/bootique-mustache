@@ -15,8 +15,8 @@ public class MvcMustacheModuleProviderTest {
     public BQTestFactory testFactory = new BQTestFactory();
 
     @Test
-    public void testPresentInJar() {
-        BQModuleProviderChecker.testPresentInJar(MvcMustacheModuleProvider.class);
+    public void testAutoLoadable() {
+        BQModuleProviderChecker.testAutoLoadable(MvcMustacheModuleProvider.class);
     }
 
     @Test
