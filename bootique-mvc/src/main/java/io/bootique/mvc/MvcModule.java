@@ -3,15 +3,14 @@ package io.bootique.mvc;
 import com.google.inject.Binder;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.google.inject.multibindings.MapBinder;
 import io.bootique.ConfigModule;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.jersey.JerseyModule;
 import io.bootique.mvc.renderer.ByExtensionTemplateRendererFactory;
 import io.bootique.mvc.renderer.TemplateRenderer;
 import io.bootique.mvc.renderer.TemplateRendererFactory;
-import io.bootique.mvc.resolver.TemplateResolverFactory;
 import io.bootique.mvc.resolver.TemplateResolver;
+import io.bootique.mvc.resolver.TemplateResolverFactory;
 
 import java.util.Map;
 
@@ -27,17 +26,6 @@ public class MvcModule extends ConfigModule {
      */
     public static MvcModuleExtender extend(Binder binder) {
         return new MvcModuleExtender(binder);
-    }
-
-    /**
-     * @param binder DI binder passed to the Module that invokes this method.
-     * @return returns a {@link MapBinder} for contributed template renderers.
-     * @deprecated since 0.14 use {@link #extend(Binder)} to get an extender object, and
-     * then call {@link MvcModuleExtender#setRenderer(String, Class)} or similar.
-     */
-    @Deprecated
-    public static MapBinder<String, TemplateRenderer> contributeRenderers(Binder binder) {
-        return MapBinder.newMapBinder(binder, String.class, TemplateRenderer.class);
     }
 
     @Override
