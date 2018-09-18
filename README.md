@@ -18,7 +18,7 @@
   -->
 
 [![Build Status](https://travis-ci.org/bootique/bootique-mvc.svg)](https://travis-ci.org/bootique/bootique-mvc)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bootique.mvc/bootique-mvc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bootique.mvc/bootique-mvc/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.bootique.mvc/bootique-mvc.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.mvc/bootique-mvc/)
 
 A simple MVC web framework for [Bootique](http://bootique.io). Uses JAX-RS (on top of 
 [bootique-jersey](https://github.com/bootique/bootique-jersey)) for processing requests and responding with 
