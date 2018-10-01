@@ -18,7 +18,7 @@ public class MvcMustacheModuleExtender extends ModuleExtender<MvcMustacheModuleE
         return this;
     }
 
-    public MvcMustacheModuleExtender setRenderer(ExecutorService es) {
+    public MvcMustacheModuleExtender setExecutorService(ExecutorService es) {
         binder.bind(ExecutorService.class).toInstance(es);
         return this;
     }
