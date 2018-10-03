@@ -47,7 +47,7 @@ public class MustacheTemplateRenderer implements TemplateRenderer {
     }
 
 	@Override
-	public synchronized void render(Writer out, Template template, Object rootModel) throws IOException {
+	public void render(Writer out, Template template, Object rootModel) throws IOException {
 
 		// TODO: cache templates...
 
