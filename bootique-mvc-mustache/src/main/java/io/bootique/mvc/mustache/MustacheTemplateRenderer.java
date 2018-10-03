@@ -59,7 +59,7 @@ public class MustacheTemplateRenderer implements TemplateRenderer {
         execute.flush();
 	}
 
-	synchronized Mustache compile(Template template) {
+	Mustache compile(Template template) {
 		// presumably Mustache closes the reader on its own...
 		Reader reader = template.reader();
 		return mustacheFactory.compile(reader, template.getName());
