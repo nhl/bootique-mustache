@@ -31,6 +31,7 @@ public class TemplateResolverFactory {
 
     private FolderResourceFactory templateBase;
     private Charset templateEncoding;
+    private int poolSize;
 
     public TemplateResolverFactory() {
         this.templateBase = new FolderResourceFactory("");
@@ -66,7 +67,18 @@ public class TemplateResolverFactory {
         this.templateEncoding = Charset.forName(Objects.requireNonNull(templateEncoding));
     }
 
+    public int getPoolSize() {
+        return poolSize;
+    }
+
+    @BQConfigProperty
+    public void setPoolSize(int poolSize) {
+        this.poolSize = poolSize;
+    }
+
     public DefaultTemplateResolver createResolver() {
         return new DefaultTemplateResolver(templateBase, templateEncoding);
     }
+
+
 }

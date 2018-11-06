@@ -15,3 +15,6 @@
 
 mvc:
   templateBase: "classpath:"
+
+mustacheRenderer:
+  poolSize: 5

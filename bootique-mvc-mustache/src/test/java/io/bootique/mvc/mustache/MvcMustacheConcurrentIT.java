@@ -31,7 +31,7 @@ public class MvcMustacheConcurrentIT {
                 .autoLoadModules()
                 .module(binder -> {
                     JerseyModule.extend(binder).addResource(MvcMustacheModuleIT.Api.class);
-                    MvcMustacheModule.extender(binder).setExecutorService(Executors.newFixedThreadPool(5));
+//                    MvcMustacheModule.extender(binder).setExecutorService(Executors.newFixedThreadPool(5));
                 })
                 .run();
     }
