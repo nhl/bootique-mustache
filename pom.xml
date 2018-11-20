@@ -38,6 +38,7 @@
     <modules>
 		<module>bootique-mvc</module>
 		<module>bootique-mvc-mustache</module>
+		<module>bootique-mvc-freemarker</module>
 	</modules>
 
 	<properties>
