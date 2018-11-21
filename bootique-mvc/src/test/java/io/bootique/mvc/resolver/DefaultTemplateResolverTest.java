@@ -36,9 +36,7 @@ public class DefaultTemplateResolverTest {
     private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     @Test
-    public void testResourcePath_EmptyBase()
-            throws MalformedURLException
-    {
+    public void testResourcePath_EmptyBase() throws MalformedURLException {
 
         DefaultTemplateResolver resolver = resolver("");
 
@@ -96,9 +94,7 @@ public class DefaultTemplateResolverTest {
     }
 
     @Test
-    public void testResourcePath_ClasspathBase()
-            throws MalformedURLException
-    {
+    public void testResourcePath_ClasspathBase() throws MalformedURLException {
 
         DefaultTemplateResolver resolver = resolver("classpath:");
 
@@ -108,27 +104,21 @@ public class DefaultTemplateResolverTest {
     }
 
     @Test
-    public void testResourcePath_ClasspathBase_Slash()
-            throws MalformedURLException
-    {
+    public void testResourcePath_ClasspathBase_Slash() throws MalformedURLException {
         DefaultTemplateResolver resolver = resolver("classpath:/");
         assertEquals(baseClasspathUrl("io/bootique/mvc/resolver/tName.txt"),
                 resolver.resourceUrl("tName.txt", DefaultTemplateResolverTest.class));
     }
 
     private DefaultTemplateResolver resolver(String basePath) {
-        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), false, DEFAULT_CHARSET);
+        return new DefaultTemplateResolver(new FolderResourceFactory(basePath), DEFAULT_CHARSET);
     }
 
-    private URL baseClasspathUrl(String resourceRelativePath)
-            throws MalformedURLException
-    {
+    private URL baseClasspathUrl(String resourceRelativePath) throws MalformedURLException {
         return baseUrl("target/test-classes/", resourceRelativePath);
     }
 
-    private URL baseUrl(String ... relativePaths)
-            throws MalformedURLException
-    {
+    private URL baseUrl(String ... relativePaths) throws MalformedURLException {
         return Paths.get(System.getProperty("user.dir"), relativePaths).toUri().toURL();
     }
 }

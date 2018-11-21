@@ -14,4 +14,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-Hello ${firstName} ${lastName}!
+<#include "hierarchy.ftl">
+<#macro content>This is custom content.</#macro>
+<@page_render/>

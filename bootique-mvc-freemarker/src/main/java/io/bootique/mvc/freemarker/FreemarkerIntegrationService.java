@@ -1,59 +1,87 @@
+/*
+ * Licensed to ObjectStyle LLC under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ObjectStyle LLC licenses
+ * this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package io.bootique.mvc.freemarker;
 
 import com.google.inject.Inject;
+import freemarker.cache.TemplateLookupContext;
+import freemarker.cache.TemplateLookupResult;
+import freemarker.cache.TemplateLookupStrategy;
 import freemarker.cache.URLTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
-import io.bootique.mvc.resolver.TemplateResolver;
+import io.bootique.BootiqueException;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Lukasz Bachman
+ * @since 1.0.RC1
  */
 class FreemarkerIntegrationService {
 
     private Configuration cfg = new Configuration(Configuration.getVersion());
 
-    private Map<String, URL> urlMapping = new HashMap<>();
-    
-    private final boolean readFromDirectory;
-
     @Inject
-    public FreemarkerIntegrationService(TemplateResolver resolver)
-            throws IOException {
-        readFromDirectory = resolver.isTemplateLocationAbsolute();
+    public FreemarkerIntegrationService() {
         cfg.setTemplateLoader(new URLTemplateLoader() {
             @Override
             protected URL getURL(String name) {
-                URL url = null;
-                if (readFromDirectory) {
-                    try {
-                        url = resolver.getTemplateBase().getUrl(name);
-                    } catch (IllegalArgumentException iae) {
-                        // We are silently dropping this exception to allow freemarker to load other localized variants of the same template.
-                    }
-                } else {
-                    url = urlMapping.get(name);
+                try {
+                    return new URL(name);
+                } catch (MalformedURLException e) {
+                    throw new BootiqueException(-1, e.getMessage(), e);
                 }
-                return url;
             }
         });
-        cfg.setDefaultEncoding(resolver.getTemplateEncoding().name());
+        cfg.setTemplateLookupStrategy(new TemplateLookupStrategy() {
+            @Override
+            public TemplateLookupResult lookup(TemplateLookupContext templateLookupContext) throws IOException {
+                // root template, can be different from template we currently lookup (e.g. in case of #include directive)
+                io.bootique.mvc.Template bqTemplate = (io.bootique.mvc.Template)templateLookupContext
+                        .getCustomLookupCondition();
+                String templateName = templateLookupContext.getTemplateName();
+                URI uri;
+                try {
+                    uri = bqTemplate.getUrl().toURI().resolve(templateName);
+                } catch (URISyntaxException e) {
+                    throw new BootiqueException(-1, e.getMessage(), e);
+                }
+                return templateLookupContext.lookupWithAcquisitionStrategy(uri.toURL().toString());
+            }
+        });
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
     }
 
-    Template getTemplate(String name, URL templateUrl)
-            throws IOException {
-        if (!readFromDirectory) {
-            urlMapping.putIfAbsent(name, templateUrl);
-        }
-        return cfg.getTemplate(name);
+    Template getTemplate(io.bootique.mvc.Template bqTemplate) throws IOException {
+        return cfg.getTemplate(
+                bqTemplate.getName(),
+                null,
+                bqTemplate,
+                bqTemplate.getEncoding().name(),
+                true,
+                false);
     }
 }

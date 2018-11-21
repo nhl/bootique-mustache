@@ -31,12 +31,10 @@ public class TemplateResolverFactory {
 
     private FolderResourceFactory templateBase;
     private Charset templateEncoding;
-    private boolean templateLocationAbsolute;
 
     public TemplateResolverFactory() {
         this.templateBase = new FolderResourceFactory("");
         this.templateEncoding = Charset.forName("UTF-8");
-        this.templateLocationAbsolute = false;
     }
 
     /**
@@ -68,17 +66,7 @@ public class TemplateResolverFactory {
         this.templateEncoding = Charset.forName(Objects.requireNonNull(templateEncoding));
     }
 
-    /**
-     * Indicates how to treat templateBase property. If the value is true then templates will be resolved relative to
-     * the directory indicated by the templateBase property. Otherwise they will be resolved relatively to the view
-     * class file.
-     */
-    @BQConfigProperty("Whether or not provided templateBase property should be treated as an absolute path.")
-    public void setTemplateLocationAbsolute(boolean templateLocationAbsolute) {
-        this.templateLocationAbsolute = templateLocationAbsolute;
-    }
-
     public DefaultTemplateResolver createResolver() {
-        return new DefaultTemplateResolver(templateBase, templateLocationAbsolute, templateEncoding);
+        return new DefaultTemplateResolver(templateBase, templateEncoding);
     }
 }

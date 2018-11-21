@@ -30,11 +30,9 @@ public class DefaultTemplateResolver implements TemplateResolver {
 
     private Charset templateEncoding;
     private FolderResourceFactory templateBase;
-    private boolean templateLocationAbsolute;
 
-    public DefaultTemplateResolver(FolderResourceFactory templateBase, boolean templateLocationAbsolute, Charset templateEncoding) {
+    public DefaultTemplateResolver(FolderResourceFactory templateBase, Charset templateEncoding) {
         this.templateBase = templateBase;
-        this.templateLocationAbsolute = templateLocationAbsolute;
         this.templateEncoding = Objects.requireNonNull(templateEncoding, "Null templateEncoding");
     }
 
@@ -63,23 +61,8 @@ public class DefaultTemplateResolver implements TemplateResolver {
         };
     }
 
-    @Override
-    public Charset getTemplateEncoding() {
-        return templateEncoding;
-    }
-
-    @Override
-    public FolderResourceFactory getTemplateBase() {
-        return templateBase;
-    }
-
-    @Override
-    public boolean isTemplateLocationAbsolute() {
-        return templateLocationAbsolute;
-    }
-
     protected URL resourceUrl(String templateName, Class<?> viewType) {
-        String path = templateLocationAbsolute ? templateName : relativeResourcePath(templateName, viewType);
+        String path = relativeResourcePath(templateName, viewType);
         return templateBase.getUrl(path);
     }
 
@@ -93,12 +76,6 @@ public class DefaultTemplateResolver implements TemplateResolver {
 
         Package pack = viewType.getPackage();
         String packagePath = pack != null ? pack.getName().replace('.', '/') + "/" : "";
-
-        StringBuilder path = new StringBuilder();
-
-        path.append(packagePath);
-        path.append(templateName);
-
-        return path.toString();
+        return packagePath + templateName;
     }
 }
