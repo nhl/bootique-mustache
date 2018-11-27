@@ -29,6 +29,6 @@ public class MvcFreemarkerModuleProviderTest {
 
 	@Test
 	public void testPresentInJar() {
-		BQModuleProviderChecker.testPresentInJar(MvcFreemarkerModuleProvider.class);
+		BQModuleProviderChecker.testAutoLoadable(MvcFreemarkerModuleProvider.class);
 	}
 }

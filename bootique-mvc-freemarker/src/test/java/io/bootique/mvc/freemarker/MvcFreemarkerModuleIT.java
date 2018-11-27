@@ -20,9 +20,9 @@
 package io.bootique.mvc.freemarker;
 
 import io.bootique.jersey.JerseyModule;
-import io.bootique.jetty.test.junit.JettyTestFactory;
 import io.bootique.mvc.freemarker.views.hierarchy.PageView;
 import io.bootique.mvc.freemarker.views.HelloWorldView;
+import io.bootique.test.junit.BQTestFactory;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -45,12 +45,15 @@ import static org.junit.Assert.assertEquals;
 public class MvcFreemarkerModuleIT {
 
 	@ClassRule
-	public static JettyTestFactory TEST_SERVER = new JettyTestFactory();
+	public static BQTestFactory TEST_SERVER = new BQTestFactory();
 
 	@BeforeClass
 	public static void beforeClass() {
-		TEST_SERVER.app().args("--config=classpath:MvcFreemarkerModuleIT.yml").autoLoadModules()
-				  .module(binder -> JerseyModule.extend(binder).addResource(Api.class)).start();
+		TEST_SERVER.app()
+				.args("--config=classpath:MvcFreemarkerModuleIT.yml", "-s")
+				.autoLoadModules()
+				.module(binder -> JerseyModule.extend(binder).addResource(Api.class))
+				.run();
 	}
 
 	@Test
