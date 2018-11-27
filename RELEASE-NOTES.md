@@ -1,6 +1,7 @@
 ## 1.0.RC1
 
 * #15 Cleaning up APIs deprecated since <= 0.25
+* #19 FreeMarker integration
 
 ## 0.25
 
