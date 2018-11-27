@@ -32,3 +32,5 @@ This framework is suitable for simple HTML UIs, where server-side rendering is m
 (e.g. when most of the UI work is done on the client with JavaScript). 
 For advanced server-side rendering, you may consider JSF, Apache Tapestry (there's [bootique-tapestry](https://github.com/bootique/bootique-tapestry)
 module available) and such.
+
+See usage example [bootique-mvc-demo](https://github.com/bootique-examples/bootique-mvc-demo).
