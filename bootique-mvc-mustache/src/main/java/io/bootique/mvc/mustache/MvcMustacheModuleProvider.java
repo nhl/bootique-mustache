@@ -25,7 +25,10 @@ import io.bootique.BQModuleProvider;
 import io.bootique.jersey.JerseyModuleProvider;
 import io.bootique.mvc.MvcModuleProvider;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
 
@@ -41,6 +44,10 @@ public class MvcMustacheModuleProvider implements BQModuleProvider {
         return BQModuleProvider.super
                 .moduleBuilder()
                 .description("Provides a renderer for bootique-mvc templates based on Mustache framework.");
+    }
+    @Override
+    public Map<String, Type> configs() {
+        return Collections.singletonMap("renderer", MustacheTemplateRendererFactory.class);
     }
 
     @Override

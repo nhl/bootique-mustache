@@ -20,8 +20,14 @@
 package io.bootique.mvc.mustache;
 
 import com.google.inject.Binder;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import io.bootique.ConfigModule;
+import io.bootique.config.ConfigurationFactory;
 import io.bootique.mvc.MvcModule;
+
+
+import static io.bootique.mvc.mustache.MustacheTemplateRendererFactory.RENDERER_PREFIX;
 
 public class MvcMustacheModule extends ConfigModule {
 
@@ -30,4 +36,12 @@ public class MvcMustacheModule extends ConfigModule {
 		MvcModule.extend(binder).setRenderer(".mustache", MustacheTemplateRenderer.class);
 	}
 
+    /**
+     * @since 1.0
+     */
+	@Singleton
+	@Provides
+	MustacheTemplateRenderer createTemplateRenderer(ConfigurationFactory configurationFactory) {
+		return configurationFactory.config(MustacheTemplateRendererFactory.class, RENDERER_PREFIX).createRenderer();
+	}
 }

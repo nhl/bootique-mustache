@@ -1,5 +1,5 @@
 ## 1.0.RC1
-
+* #4 Added multi-threaded rendering options to Mustache
 * #15 Cleaning up APIs deprecated since <= 0.25
 * #19 FreeMarker integration
 
