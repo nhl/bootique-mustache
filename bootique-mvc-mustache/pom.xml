@@ -36,7 +36,7 @@
 			<dependency>
 				<groupId>io.bootique.mvc</groupId>
 				<artifactId>bootique-mvc</artifactId>
-				<version>${bootique.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.spullara.mustache.java</groupId>
