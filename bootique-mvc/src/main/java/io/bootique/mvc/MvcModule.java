@@ -67,7 +67,7 @@ public class MvcModule extends ConfigModule {
 
     @Singleton
     @Provides
-    TemplateResolver createTemplateResolver(ConfigurationFactory configurationFactory) {
-        return configurationFactory.config(TemplateResolverFactory.class, configPrefix).createResolver();
+    TemplateResolver createTemplateResolver(ConfigurationFactory configFactory) {
+        return config(TemplateResolverFactory.class, configFactory).createResolver();
     }
 }
