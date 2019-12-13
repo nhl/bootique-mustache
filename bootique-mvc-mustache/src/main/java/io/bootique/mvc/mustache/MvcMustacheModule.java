@@ -19,8 +19,8 @@
 
 package io.bootique.mvc.mustache;
 
-import com.google.inject.Binder;
 import io.bootique.ConfigModule;
+import io.bootique.di.Binder;
 import io.bootique.mvc.MvcModule;
 
 public class MvcMustacheModule extends ConfigModule {

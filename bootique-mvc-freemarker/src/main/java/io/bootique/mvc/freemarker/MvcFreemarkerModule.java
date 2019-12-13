@@ -19,10 +19,11 @@
 
 package io.bootique.mvc.freemarker;
 
-import com.google.inject.Binder;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
+import javax.inject.Singleton;
+
 import io.bootique.ConfigModule;
+import io.bootique.di.Binder;
+import io.bootique.di.Provides;
 import io.bootique.mvc.MvcModule;
 
 /**

@@ -19,11 +19,10 @@
 
 package io.bootique.mvc;
 
-import com.google.inject.Binder;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import io.bootique.ConfigModule;
 import io.bootique.config.ConfigurationFactory;
+import io.bootique.di.Binder;
+import io.bootique.di.Provides;
 import io.bootique.jersey.JerseyModule;
 import io.bootique.mvc.renderer.ByExtensionTemplateRendererFactory;
 import io.bootique.mvc.renderer.TemplateRenderer;
@@ -32,6 +31,7 @@ import io.bootique.mvc.resolver.TemplateResolver;
 import io.bootique.mvc.resolver.TemplateResolverFactory;
 
 import java.util.Map;
+import javax.inject.Singleton;
 
 public class MvcModule extends ConfigModule {
 

@@ -19,7 +19,6 @@
 
 package io.bootique.mvc.freemarker;
 
-import com.google.inject.Inject;
 import freemarker.cache.TemplateLookupContext;
 import freemarker.cache.TemplateLookupResult;
 import freemarker.cache.TemplateLookupStrategy;
@@ -34,6 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import javax.inject.Inject;
 
 /**
  * @author Lukasz Bachman

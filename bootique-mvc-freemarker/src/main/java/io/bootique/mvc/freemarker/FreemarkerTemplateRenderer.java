@@ -19,13 +19,13 @@
 
 package io.bootique.mvc.freemarker;
 
-import com.google.inject.Inject;
 import freemarker.template.TemplateException;
 import io.bootique.mvc.Template;
 import io.bootique.mvc.renderer.TemplateRenderer;
 
 import java.io.IOException;
 import java.io.Writer;
+import javax.inject.Inject;
 
 /**
  * @author Lukasz Bachman

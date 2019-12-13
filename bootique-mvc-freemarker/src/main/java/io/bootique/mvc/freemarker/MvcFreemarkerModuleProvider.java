@@ -19,9 +19,9 @@
 
 package io.bootique.mvc.freemarker;
 
-import com.google.inject.Module;
-import io.bootique.BQModule;
+import io.bootique.BQModuleMetadata;
 import io.bootique.BQModuleProvider;
+import io.bootique.di.BQModule;
 
 /**
  * @author Lukasz Bachman
@@ -30,12 +30,12 @@ import io.bootique.BQModuleProvider;
 public class MvcFreemarkerModuleProvider implements BQModuleProvider {
 
 	@Override
-	public Module module() {
+	public BQModule module() {
 		return new MvcFreemarkerModule();
 	}
 
 	@Override
-	public BQModule.Builder moduleBuilder() {
+	public BQModuleMetadata.Builder moduleBuilder() {
 		return BQModuleProvider.super
 				.moduleBuilder()
 				.description("Provides a renderer for bootique-mvc templates based on Freemarker framework.");

@@ -19,9 +19,9 @@
 
 package io.bootique.mvc;
 
-import com.google.inject.Module;
-import io.bootique.BQModule;
+import io.bootique.BQModuleMetadata;
 import io.bootique.BQModuleProvider;
+import io.bootique.di.BQModule;
 import io.bootique.jersey.JerseyModuleProvider;
 import io.bootique.mvc.resolver.TemplateResolverFactory;
 
@@ -33,7 +33,7 @@ import java.util.Map;
 public class MvcModuleProvider implements BQModuleProvider {
 
     @Override
-    public Module module() {
+    public BQModule module() {
         return new MvcModule();
     }
 
@@ -46,7 +46,7 @@ public class MvcModuleProvider implements BQModuleProvider {
     }
 
     @Override
-    public BQModule.Builder moduleBuilder() {
+    public BQModuleMetadata.Builder moduleBuilder() {
         return BQModuleProvider.super
                 .moduleBuilder()
                 .description("Provides a REST-based web MVC engine with pluggable view renderers.");
