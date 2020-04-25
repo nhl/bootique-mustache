@@ -43,6 +43,7 @@
 
 	<properties>
 		<bootique.version>${project.version}</bootique.version>
+		<mustache.version>0.9.6</mustache.version>
 	</properties>
 
     <scm>

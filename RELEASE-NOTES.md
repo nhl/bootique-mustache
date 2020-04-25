@@ -1,3 +1,7 @@
+## 2.0
+
+* #20 Upgrade Mustache to 0.9.6
+
 ## 1.0.RC1
 
 * #15 Cleaning up APIs deprecated since <= 0.25
