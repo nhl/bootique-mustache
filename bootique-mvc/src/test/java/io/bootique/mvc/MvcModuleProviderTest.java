@@ -39,7 +39,7 @@ public class MvcModuleProviderTest {
 
     @Test
     public void testModuleDeclaresDependencies() {
-        final BQRuntime bqRuntime = testFactory.app().module(new MvcModuleProvider()).createRuntime();
+        final BQRuntime bqRuntime = testFactory.app().moduleProvider(new MvcModuleProvider()).createRuntime();
         BQRuntimeChecker.testModulesLoaded(bqRuntime,
                 JerseyModule.class,
                 MvcModule.class
