@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>io.bootique.mvc</groupId>
 		<artifactId>bootique-mvc-parent</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
 	</parent>
 	<artifactId>bootique-mvc-mustache</artifactId>
 	<packaging>jar</packaging>
