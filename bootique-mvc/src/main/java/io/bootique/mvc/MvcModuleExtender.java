@@ -42,7 +42,7 @@ public class MvcModuleExtender extends ModuleExtender<MvcModuleExtender> {
     }
 
     public MvcModuleExtender setRenderer(String handledExtension, TemplateRenderer renderer) {
-        contributeRenderers().put(handledExtension, renderer);
+        contributeRenderers().putInstance(handledExtension, renderer);
         return this;
     }
 
