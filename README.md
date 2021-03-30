@@ -17,7 +17,7 @@
   under the License.
   -->
 
-[![Build Status](https://travis-ci.org/bootique/bootique-mvc.svg)](https://travis-ci.org/bootique/bootique-mvc)
+[![build test deploy](https://github.com/bootique/bootique-mvc/actions/workflows/maven.yml/badge.svg)](https://github.com/bootique/bootique-mvc/actions/workflows/maven.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/io.bootique.mvc/bootique-mvc.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.mvc/bootique-mvc/)
 
 A simple MVC web framework for [Bootique](http://bootique.io).
