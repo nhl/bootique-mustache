@@ -23,13 +23,12 @@ import freemarker.template.TemplateException;
 import io.bootique.mvc.Template;
 import io.bootique.mvc.renderer.TemplateRenderer;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.io.Writer;
-import javax.inject.Inject;
 
 /**
  * @author Lukasz Bachman
- * @since 1.0.RC1
  */
 public class FreemarkerTemplateRenderer implements TemplateRenderer {
 

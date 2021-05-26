@@ -28,16 +28,15 @@ import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import io.bootique.BootiqueException;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import javax.inject.Inject;
 
 /**
  * @author Lukasz Bachman
- * @since 1.0.RC1
  */
 class FreemarkerIntegrationService {
 

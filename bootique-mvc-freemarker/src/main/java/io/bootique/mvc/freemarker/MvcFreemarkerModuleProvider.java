@@ -25,7 +25,6 @@ import io.bootique.di.BQModule;
 
 /**
  * @author Lukasz Bachman
- * @since 1.0.RC1
  */
 public class MvcFreemarkerModuleProvider implements BQModuleProvider {
 

@@ -19,16 +19,15 @@
 
 package io.bootique.mvc.freemarker;
 
-import javax.inject.Singleton;
-
 import io.bootique.ConfigModule;
 import io.bootique.di.Binder;
 import io.bootique.di.Provides;
 import io.bootique.mvc.MvcModule;
 
+import javax.inject.Singleton;
+
 /**
  * @author Lukasz Bachman
- * @since 1.0.RC1
  */
 public class MvcFreemarkerModule extends ConfigModule {
 

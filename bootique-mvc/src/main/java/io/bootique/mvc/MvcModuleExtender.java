@@ -24,9 +24,6 @@ import io.bootique.di.Binder;
 import io.bootique.di.MapBuilder;
 import io.bootique.mvc.renderer.TemplateRenderer;
 
-/**
- * @since 0.6
- */
 public class MvcModuleExtender extends ModuleExtender<MvcModuleExtender> {
 
     private MapBuilder<String, TemplateRenderer> templateRenderers;

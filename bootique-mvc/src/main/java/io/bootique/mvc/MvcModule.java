@@ -30,8 +30,8 @@ import io.bootique.mvc.renderer.TemplateRendererFactory;
 import io.bootique.mvc.resolver.TemplateResolver;
 import io.bootique.mvc.resolver.TemplateResolverFactory;
 
-import java.util.Map;
 import javax.inject.Singleton;
+import java.util.Map;
 
 public class MvcModule extends ConfigModule {
 
@@ -41,7 +41,6 @@ public class MvcModule extends ConfigModule {
      *
      * @param binder DI binder passed to the Module that invokes this method.
      * @return an instance of {@link MvcModuleExtender} that can be used to load custom extensions to the MvcModule.
-     * @since 0.6
      */
     public static MvcModuleExtender extend(Binder binder) {
         return new MvcModuleExtender(binder);
